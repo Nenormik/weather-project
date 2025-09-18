@@ -6,8 +6,10 @@ pipeline {
                 script {
                     sh('''#!/bin/bash
                     ls -la
+                    pwd
                     systemctl status docker
                     cd myapp
+                    pwd
                     docker build -t weather-app .
                     docker run -d -p 8099:8099 --name weather-app weather-app''')
                 }
