@@ -1,1 +1,17 @@
-
+pipeline {
+    agent any 
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    sh('''#!/bin/bash
+                    ls -la
+                    systemctl status docker
+                    cd myapp
+                    docker build -t weather-app .
+                    docker run -d -p 8099:8099 --name weather-app weather-app''')
+                }
+            }
+        }
+    }
+}
