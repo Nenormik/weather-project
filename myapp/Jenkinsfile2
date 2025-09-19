@@ -8,7 +8,9 @@ pipeline {
                     echo "---------------Clearing All Container:------------------------"
                     docker stop weather-app cadvisor prometheus grafana
                     docker rm weather-app cadvisor prometheus grafana
-        stage('Building) {
+            }
+        }    
+        stage('Building') {
             steps {
                 script { 
                     sh('''#!/bin/bash
