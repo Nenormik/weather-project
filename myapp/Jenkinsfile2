@@ -32,5 +32,5 @@ pipeline {
              docker stop weather-app cadvisor prometheus grafana
              docker rm weather-app cadvisor prometheus grafana
          }
-     }
+    }
 }
