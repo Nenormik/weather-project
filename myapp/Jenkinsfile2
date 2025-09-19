@@ -1,9 +1,16 @@
 pipeline {
-    agent any 
+    agent any
     stages {
-        stage('Build') {
+        stage('Preparing') {
             steps {
                 script {
+                    sh('''#!/bin/bash
+                    echo "---------------Clearing All Container:------------------------"
+                    docker stop weather-app cadvisor prometheus grafana
+                    docker rm weather-app cadvisor prometheus grafana
+        stage('Building) {
+            steps {
+                script { 
                     sh('''#!/bin/bash
                     ls -la
                     pwd
@@ -24,13 +31,5 @@ pipeline {
                 }
             }
         }
-    }
-    post {
-         always {
-             sh('''#!/bin/bash
-             echo "---------------Clearing All Container:------------------------"
-             docker stop weather-app cadvisor prometheus grafana
-             docker rm weather-app cadvisor prometheus grafana
-         }
     }
 }
