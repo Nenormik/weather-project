@@ -4,16 +4,19 @@ pipeline {
         stage('Preparing') {
             steps {
                 script {
-                    sh('''#!/bin/bash
+                    sh('''
                     echo "---------------Clearing All Container:------------------------"
                     docker stop weather-app cadvisor prometheus grafana
-                    docker rm weather-app cadvisor prometheus grafana''')
-            }
-        }    
+                    docker rm weather-app cadvisor prometheus grafana
+                    ''')
+                }
+            }    
+        }
+
         stage('Building') {
             steps {
                 script { 
-                    sh('''#!/bin/bash
+                    sh('''
                     ls -la
                     pwd
                     systemctl status docker
@@ -29,7 +32,8 @@ pipeline {
 
                     echo "-----------------Running Grafana container:--------------------------"
                     docker run -d --restart unless-stopped --name grafana -p 3000:3000 grafana/grafana
-                    docker ps''')
+                    docker ps
+                    ''')
                 }
             }
         }
