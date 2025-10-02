@@ -1,12 +1,11 @@
 import requests
 from flask import Flask, render_template, request, jsonify
-from prometheus_flask_exporter import PrometheusMetrics
 import threading
 import time
+import json
 import os
 
-app = Flask(__name__)  # Исправлено на __name__
-metrics = PrometheusMetrics(app)  # Инициализация PrometheusMetrics
+app = Flask(__name__)
 
 API_KEY = os.environ.get('WEATHER_API_KEY', 'fe8afe3391c9ea2f05ede058c41e112e')
 BASE_URL = 'http://api.openweathermap.org/data/2.5/weather'
@@ -68,7 +67,6 @@ def index():
     return render_template('index.html')
 
 @app.route('/weather')
-@metrics.counter('weather_requests_total', 'Total number of weather requests')  # Переместили сюда
 def weather():
     city = request.args.get('city')
     if city:
@@ -100,6 +98,6 @@ def remove_favorite():
         favorites.remove(city)
     return jsonify({'favorites': favorites})
 
-if __name__ == '__main__':  # Исправлено на __name__
+if __name__ == '__main__':
     start_background_service()
     app.run(host='0.0.0.0', port=8099, debug=False)
