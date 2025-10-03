@@ -35,7 +35,7 @@ pipeline {
                     docker ps
 
                     echo "-----------------Running cAdvisor container:--------------------------"
-                    docker run -d 
+                    docker run -d
                         --name=cadvisor 
                         --volume=/:/rootfs:ro 
                         --volume=/var/run:/var/run:rw 
