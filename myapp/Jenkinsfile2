@@ -49,7 +49,7 @@ pipeline {
                         gcr.io/cadvisor/cadvisor:latest
                     
                     echo "-----------------Running Node Exporter container:--------------------------"
-                    docker run -d --restart unless-stopped --name node_exporter -p 9100:9100 prom/node-exporter
+                    docker run -d --restart unless-stopped --name node_exporter -p 9101:9100 prom/node-exporter
                     ''')
                 }
             }
