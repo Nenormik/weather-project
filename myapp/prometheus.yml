@@ -2,10 +2,6 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: 'my_app'
-    static_configs:
-      - targets: ['192.168.1.38:8099']
-
   - job_name: 'node_exporter'
     static_configs:
       - targets: ['192.168.1.38:9101']  # Изменил на 9101, так как у вас node_exporter на этом порту
