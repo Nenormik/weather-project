@@ -6,8 +6,8 @@ pipeline {
                 script {
                     sh('''
                     echo "---------------Clearing All Container:------------------------"
-                    docker stop weather-app cadvisor prometheus grafana node_exporter || true
-                    docker rm weather-app cadvisor prometheus grafana node_exporter || true
+                    docker stop weather-app cadvisor prometheus grafana node_exporter cadvisor || true
+                    docker rm weather-app cadvisor prometheus grafana node_exporter cadvisor || true
                     ''')
                 }
             }    
@@ -33,6 +33,16 @@ pipeline {
                     echo "-----------------Running Grafana container:--------------------------"
                     docker run -d --restart unless-stopped --name grafana -p 3000:3000 grafana/grafana
                     docker ps
+
+                    echo "-----------------Running cAdvisor container:--------------------------"
+                    docker run -d 
+                        --name=cadvisor 
+                        --volume=/:/rootfs:ro 
+                        --volume=/var/run:/var/run:rw 
+                        --volume=/sys:/sys:ro 
+                        --volume=/var/lib/docker/:/var/lib/docker:ro 
+                        -p 8090:8080 
+                        google/cadvisor:latest
                     
                     echo "-----------------Running Node Exporter container:--------------------------"
                     docker run -d --restart unless-stopped --name node_exporter -p 9100:9100 prom/node-exporter
