@@ -8,6 +8,7 @@ pipeline {
                     echo "---------------Clearing All Containers:------------------------"
                     docker stop $(docker ps -aq) || true  # Останавливаем все контейнеры
                     docker rm $(docker ps -aq) || true  # Удаляем все контейнеры
+                    sleep 5  # Ждем освобождения портов
                     ''')
                 }
             }    
