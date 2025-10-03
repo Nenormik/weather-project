@@ -5,9 +5,9 @@ pipeline {
             steps {
                 script {
                     sh('''
-                    echo "---------------Clearing All Container:------------------------"
-                    docker stop weather-app cadvisor prometheus grafana node_exporter cadvisor-gcr || true
-                    docker rm weather-app cadvisor prometheus grafana node_exporter cadvisor-gcr || true
+                    echo "---------------Clearing All Containers:------------------------"
+                    docker stop $(docker ps -aq) || true  # Останавливаем все контейнеры
+                    docker rm $(docker ps -aq) || true  # Удаляем все контейнеры
                     ''')
                 }
             }    
