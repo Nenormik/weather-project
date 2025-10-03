@@ -6,8 +6,8 @@ pipeline {
                 script {
                     sh('''
                     echo "---------------Clearing All Container:------------------------"
-                    docker stop weather-app cadvisor prometheus grafana node_exporter cadvisor || true
-                    docker rm weather-app cadvisor prometheus grafana node_exporter cadvisor || true
+                    docker stop weather-app cadvisor prometheus grafana node_exporter cadvisor-gcr || true
+                    docker rm weather-app cadvisor prometheus grafana node_exporter cadvisor-gcr || true
                     ''')
                 }
             }    
